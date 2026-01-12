@@ -269,7 +269,7 @@ text-shadow:
     .panel {
         width: 94vw;
         height: 88vh;
-        background-color: blue;
+        /* background-color: blue; */
     }
 
     .logo {
