@@ -55,7 +55,7 @@ class ScoreController extends Controller
     $teamName = $request->input('team') ?? session('current_team', 'GUEST'); 
     // dd($teamName);
     try {
-        $response = Http::get('https://sheetdb.io/api/v1/kpfuvg4jmwri7', [
+        $response = Http::get('https://sheetdb.io/api/v1/0ylr577ytdtnt', [
             'sheet' => 'Total Poin'
         ]);
 
