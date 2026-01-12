@@ -9,8 +9,17 @@ use Illuminate\Http\Client\ConnectionException; // Import Exception untuk timeou
 
 class EscapeRoomController extends Controller
 {
+
+    private $csvUrl;
+
+    public function __construct()
+    {
+        $this->csvUrl = env('ESCAPE_ROOM_CSV_URL');
+    }
     // URL Google Sheets
-    private $csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRg0QkYlakL9LjHs2rd6LTy0v4MQzHz-czKvHQbYZ66vOG-j9sN1fXaRCEbwW4D2ANlXVzzTowNTVV8/pub?gid=0&single=true&output=csv';
+    //private $csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRg0QkYlakL9LjHs2rd6LTy0v4MQzHz-czKvHQbYZ66vOG-j9sN1fXaRCEbwW4D2ANlXVzzTowNTVV8/pub?gid=0&single=true&output=csv';
+
+
 
     public function index()
     {

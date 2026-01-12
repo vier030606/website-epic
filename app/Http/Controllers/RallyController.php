@@ -9,8 +9,15 @@ use Illuminate\Http\Client\ConnectionException;
 
 class RallyController extends Controller 
 {
+
+    private $csvUrl;
+
+    public function __construct()
+    {
+        $this->csvUrl = env('RALLY_CSV_URL');
+    }
     // URL Google Sheets CSV
-    private $csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxOPMetp-uBxegf-4cbeGMJarl5kyukltpEqXC_YNMLvoJ3Rwm3bHCR0CBQ8EvPPsHX6ALANW8TOjo/pub?gid=1268112569&single=true&output=csv';
+   // private $csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxOPMetp-uBxegf-4cbeGMJarl5kyukltpEqXC_YNMLvoJ3Rwm3bHCR0CBQ8EvPPsHX6ALANW8TOjo/pub?gid=1268112569&single=true&output=csv';
 
     public function index()
     {

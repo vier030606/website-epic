@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'escape_room' => [
+        'csv_url' => env('ESCAPE_ROOM_CSV_URL'),
+    ],
+
+    'rally' => [
+        'csv_url' => env('RALLY_CSV_URL'),
+    ],
+
 ];
