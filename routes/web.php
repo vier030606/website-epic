@@ -12,10 +12,16 @@ Route::get('/escape-room', [EscapeRoomController::class, 'index'])->name('escape
 Route::get('/rally', [RallyController::class, 'index'])->name('rally.index');
 
 // Route Scoreboard yang benar (menerima parameter team)//GANTI POST, agar paramter tidak dibaca
-Route::get('/scoreboard', function (Illuminate\Http\Request $request) {
-    $teamName = $request->query('team', 'GUEST'); 
-    return view('scoreboard', ['teamName' => $teamName]);
-})->name('score.index');
+// Di routes/web.php
+Route::post('/scoreboard', function (Illuminate\Http\Request $request) {
+    // Gunakan input() untuk POST
+    //$teamName = $request->input('team', 'GUEST'); 
+    
+    // Jika Anda ingin memanggil logic ScoreController, pastikan diarahkan ke sana
+    return (new App\Http\Controllers\ScoreController)->index($request);
+});
+
+Route::get('/scoreboard', [RallyController::class, 'index'])->name('rally.index');
 
 // --- ROUTE UNTUK API ---
 // API Rally (Gunakan ini di halaman Rally)

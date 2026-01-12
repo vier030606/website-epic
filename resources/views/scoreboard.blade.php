@@ -11,8 +11,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="score.css">
-
     <style>
         :root {
     /* BACKGROUNDS */
@@ -106,7 +104,7 @@ body {
 }
 
 .logo {
-    max-width: 55vw;
+    max-width: 45vw;
 }
 
 .scoreboard {
@@ -633,7 +631,7 @@ text-shadow:
         }
 
         .name-cont {
-            margin-top: 10vh;
+            margin-top: 15vh;
         }
 
         .score-main {
@@ -696,8 +694,7 @@ text-shadow:
 
         <div id="mainContainer" class="panel">
             @php
-                // Pastikan variabel dibersihkan dari karakter non-angka jika ada
-                $valRally = $result->{'TOTAL ECT RALLY'} ?? 90;
+                $valRally = $result->{'POIN RALLYgi'} ?? 0;
                 $currentScore = (int) filter_var($valRally, FILTER_SANITIZE_NUMBER_INT);
 
                 if($currentScore >= 90) {
@@ -731,14 +728,14 @@ text-shadow:
                     <h3>ECT Rally</h3>
                     <!-- {{-- Border box ikut berubah sesuai warna level --}} -->
                     <div class="score-cont" style="border-color: {{ $lvlColor }};">
-                        <h3>{{ $result->{'TOTAL ECT RALLY'} ?? '0' }}</h3>
+                        <h3>{{ $result->{'POIN RALLY'} ?? '0' }}</h3>
                     </div>
                 </div>
 
                 <div class="score">
                     <h3>ECT Total</h3>
                     <div class="score-cont" style="border-color: {{ $lvlColor }};">
-                        <h3>{{ $result->{'JUMLAH ECT ON HAND'} ?? '0' }}</h3>
+                        <h3>{{ $result->{'RALLY TOTAL'} ?? '0' }}</h3>
                     </div>
                 </div>
             </div>

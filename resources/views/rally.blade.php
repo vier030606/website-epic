@@ -658,17 +658,32 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    // LANGSUNG HIJAU
-                    otpInputs.forEach((input) => {
-                        input.style.borderColor = "#28FB36";     
-                        input.style.backgroundColor = "#15850B"; 
-                        input.style.color = "#FFFFFF";           
-                    });
+                    // ... (kode warna hijau dan feedback sukses) ...
 
-                    showFeedback('success');
+                    // GANTI window.location.href DENGAN KODE DI BAWAH:
                     
-                    // LANGSUNG PINDAH (Tanpa setTimeout)
-                    window.location.href = `{{ url('/scoreboard') }}?team=${encodeURIComponent(teamName)}`;
+                    // 1. Buat form secara dinamis
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = `{{ url('/scoreboard') }}`;
+
+                    // 2. Tambahkan CSRF Token (Wajib di Laravel POST)
+                    const csrfInput = document.createElement('input');
+                    csrfInput.type = 'hidden';
+                    csrfInput.name = '_token';
+                    csrfInput.value = document.querySelector('meta[name="csrf-token"]').content;
+                    form.appendChild(csrfInput);
+
+                    // 3. Tambahkan data Team
+                    const teamInput = document.createElement('input');
+                    teamInput.type = 'hidden';
+                    teamInput.name = 'team';
+                    teamInput.value = teamName;
+                    form.appendChild(teamInput);
+
+                    // 4. Masukkan ke dokumen dan submit
+                    document.body.appendChild(form);
+                    form.submit();
                     
                 } else {
                     // LANGSUNG MERAH
