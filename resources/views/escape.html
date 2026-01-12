@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC NATIONAL Escape Room</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="escape.css">
+</head>
+<body>
+
+    <!-- Background -->
+    <img id="background" src="image\background.png" alt="Background">
+
+    <!-- Main Panel -->
+    <div id="mainContainer">
+
+        <!-- Logo Escape -->
+        <img id="logoEscape" src="image\escapeRoom.png" alt="Logo Escape Room">
+
+        <!-- Code Input -->
+        <div id="codeContainer">
+            <input type="text" maxlength="1" class="code-input" autocomplete="off" id="otp1" autofocus>
+            <input type="text" maxlength="1" class="code-input" autocomplete="off" id="otp2">
+            <input type="text" maxlength="1" class="code-input" autocomplete="off" id="otp3">
+            <input type="text" maxlength="1" class="code-input" autocomplete="off" id="otp4">
+            <input type="text" maxlength="1" class="code-input" autocomplete="off" id="otp5">
+        </div>
+
+        <!-- Search Team -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search Team" autocomplete="off">
+            <div id="suggestions" class="suggestions-box"></div>
+        </div>
+
+        <!-- Correct / False Message -->
+        <div class="correct">
+            <h3 id="correct_msg">Code Verified Successfully!</h3>
+        </div>
+        <div class="false">
+            <h3>Incorrect Code. Please Try Again.</h3>
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submitBtn">SUBMIT</button>
+    </div>
+
+    <!-- Images -->
+    <img id="logoEPIC" src="image\EPIC.png" alt="Logo EPIC">
+    <img id="eeyonNembak" src="image\eeyonNembak.png" alt="Eeyon Nembak">
+    <img id="roket" src="image\roket.png" alt="Roket">
+    <img id="eeyonBurger" src="image\eeyonBurger.png" alt="Eeyon Burger">
+
+    <!-- JavaScript -->
+    <script src="escape.js"></script>
+</body>
+</html>
