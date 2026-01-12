@@ -56,7 +56,7 @@ class ScoreController extends Controller
     // dd($teamName);
     try {
         $response = Http::get('https://sheetdb.io/api/v1/0ylr577ytdtnt', [
-            'sheet' => 'Total Poin'
+            'sheet' => 'REKAP ECT RALLY GAMES SEMENTARA'
         ]);
 
         if ($response->successful()) {

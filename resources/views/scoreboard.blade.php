@@ -694,15 +694,15 @@ text-shadow:
 
         <div id="mainContainer" class="panel">
             @php
-                $valRally = $result->{'POIN RALLY'} ?? 0;
+                $valRally = $result->{'JUMLAH ECT ON HAND'} ?? 0;
                 $currentScore = (int) filter_var($valRally, FILTER_SANITIZE_NUMBER_INT);
                 
-                $valTotal = $result->{'RALLY TOTAL'} ?? 0;
+                $valTotal = $result->{'TOTAL ECT RALLY'} ?? 0;
                 $totalScore = (int) filter_var($valTotal, FILTER_SANITIZE_NUMBER_INT);
-                if($currentScore >= 90) {
+                if($totalScore >= 90) {
                     $lvlColor = "#7DE05C";
                     $lvlText  = "Level 3";
-                } elseif($currentScore >= 40) {
+                } elseif($totalScore >= 40) {
                     $lvlColor = "#FFD739"; 
                     $lvlText  = "Level 2";
                 } else {
@@ -727,7 +727,7 @@ text-shadow:
 
             <div class="score-main">
                 <div class="score">
-                    <h3>ECT Rally</h3>
+                    <h3>EST ON HAND</h3>
                     <!-- {{-- Border box ikut berubah sesuai warna level --}} -->
                     <div class="score-cont" style="border-color: {{ $lvlColor }};">
                         <h3>{{ $currentScore }}</h3>
@@ -735,7 +735,7 @@ text-shadow:
                 </div>
 
                 <div class="score">
-                    <h3>ECT Total</h3>
+                    <h3>EST TOTAL</h3>
                     <div class="score-cont" style="border-color: {{ $lvlColor }};">
                         <h3>{{ $totalScore }}</h3>
                     </div>
