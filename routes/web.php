@@ -6,6 +6,8 @@ use App\Http\Controllers\RallyController; // Tambahkan ini
 use App\Http\Controllers\ScoreController;
 
 // --- ROUTE UNTUK FRONTEND ---
+Route::get('/', [RallyController::class, 'index'])->name('rally.index');
+
 Route::get('/escape-room', [EscapeRoomController::class, 'index'])->name('escape.index');
 Route::get('/rally', [RallyController::class, 'index'])->name('rally.index');
 
