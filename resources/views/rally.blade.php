@@ -84,15 +84,15 @@
 
         .logo {
             position: absolute;
-            top: 0vh;
+            top: -2vh;
             left: 50%;
             transform: translateX(-50%);
-            width: clamp(160px, 25vw, 260px);
+            width: clamp(160px, 25vw, 230px);
             z-index: 10;
         }
 
         .logo {
-            max-width: 55vw;
+            max-width: 45vw;
         }
 
         .panel {
