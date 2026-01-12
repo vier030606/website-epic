@@ -694,7 +694,7 @@ text-shadow:
 
         <div id="mainContainer" class="panel">
             @php
-                $valRally = $result->{'POIN RALLYgi'} ?? 0;
+                $valRally = $result->{'POIN RALLY'} ?? 0;
                 $currentScore = (int) filter_var($valRally, FILTER_SANITIZE_NUMBER_INT);
 
                 if($currentScore >= 90) {
