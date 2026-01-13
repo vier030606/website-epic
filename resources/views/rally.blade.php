@@ -541,8 +541,8 @@
     </div>
 
     <script>
-        const API_URL_VALIDATE = '{{ url("/api/rally-validate") }}';
-        const API_URL_TEAMS = '{{ url("/api/rally-teams") }}';
+        const API_URL_VALIDATE = '{{ url("/rally-validate") }}';
+        const API_URL_TEAMS = '{{ url("/rally-teams") }}';
 
         const otpInputs = Array.from(document.querySelectorAll('.otp-input'));
         const searchInput = document.querySelector('.search-input');
@@ -648,6 +648,7 @@
             try {
                 const response = await fetch(API_URL_VALIDATE, {
                     method: 'POST',
+                    credentials: 'same-origin',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content

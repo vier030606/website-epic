@@ -25,8 +25,8 @@ Route::get('/scoreboard', [RallyController::class, 'index'])->name('rally.index'
 
 // --- ROUTE UNTUK API ---
 // API Rally (Gunakan ini di halaman Rally)
-Route::get('/api/rally-teams', [RallyController::class, 'getTeamNames']);
-Route::post('/api/rally-validate', [RallyController::class, 'checkCode'])->middleware('throttle:60,1');
+Route::get('/rally-teams', [RallyController::class, 'getTeamNames']);
+Route::post('/rally-validate', [RallyController::class, 'checkCode'])->middleware('throttle:60,1');
 
 // API Escape Room (Jika masih digunakan)
 Route::get('/api/team-names', [EscapeRoomController::class, 'getTeamNames']);
