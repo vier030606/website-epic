@@ -353,6 +353,7 @@
             try {
                 const response = await fetch(API_URL_VALIDATE, {
                     method: 'POST',
+                    credentials: 'same-origin',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
