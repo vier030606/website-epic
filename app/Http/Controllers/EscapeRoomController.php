@@ -6,20 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\ConnectionException; // Import Exception untuk timeout
+use Carbon\Carbon; // Import Carbon untuk waktu
 
 class EscapeRoomController extends Controller
 {
 
     private $csvUrl;
+    private $scriptUrl; // Tambahkan variabel untuk URL Script
 
     public function __construct()
     {
         $this->csvUrl = env('ESCAPE_ROOM_CSV_URL');
+        $this->scriptUrl = env('ESCAPE_ROOM_SCRIPT_URL'); // Ambil dari env
     }
-    // URL Google Sheets
-    //private $csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRg0QkYlakL9LjHs2rd6LTy0v4MQzHz-czKvHQbYZ66vOG-j9sN1fXaRCEbwW4D2ANlXVzzTowNTVV8/pub?gid=0&single=true&output=csv';
-
-
 
     public function index()
     {
@@ -30,7 +29,7 @@ class EscapeRoomController extends Controller
      * Mengambil dan memproses data dari Google Sheets, menggunakan caching.
      * Data hanya diunduh jika tidak ada di cache (misal 1 jam).
      */
-    private function getTeamData()
+    public function getTeamData()
     {
         // Gunakan cache untuk menyimpan data selama 60 menit (3600 detik)
         return Cache::remember('escape_room_codes', 3600, function () {
@@ -106,14 +105,45 @@ class EscapeRoomController extends Controller
         if (!$team) {
             return response()->json([
                 'success' => false,
-                'message' => 'Incorrect Team or Code.',
+                'message' => 'Team not found.',
                 'correct_code' => null
-            ], 401);
+            ], 404);
         }
 
         $correctCode = $team['code'];
+        
+        // 1. HITUNG JUMLAH BENAR & SALAH
+        $benar = 0;
+        $inputChars = str_split($codeInput);
+        $correctChars = str_split($correctCode);
 
-        // Jika benar
+        // Loop 5 digit
+        for ($i = 0; $i < 5; $i++) {
+            if (isset($inputChars[$i]) && isset($correctChars[$i])) {
+                if ($inputChars[$i] === $correctChars[$i]) {
+                    $benar++;
+                }
+            }
+        }
+        $salah = 5 - $benar;
+
+        // 2. KIRIM KE GOOGLE SPREADSHEET (Non-Blocking / Asynchronous sebaiknya, tapi Http biasa cukup cepat)
+        // Kita gunakan try-catch agar jika Google error, user tetap dapat feedback web
+        try {
+            if ($this->scriptUrl) {
+                Http::timeout(2)->post($this->scriptUrl, [
+                    'team_name' => $team['display_name'], // Kirim nama asli
+                    'benar' => $benar,
+                    'salah' => $salah,
+                    'timestamp' => Carbon::now('Asia/Jakarta')->toDateTimeString()
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Log error tapi jangan hentikan flow user
+            logger()->error("Gagal update spreadsheet: " . $e->getMessage());
+        }
+
+        // 3. RETURN RESPONSE KE FRONTEND
         if ($correctCode === $codeInput) {
             return response()->json([
                 'success' => true,
@@ -122,10 +152,9 @@ class EscapeRoomController extends Controller
             ]);
         }
 
-        // Jika salah → tetap kirim correct_code agar FE bisa warnai per digit
         return response()->json([
             'success' => false,
-            'message' => 'Incorrect Team or Code.',
+            'message' => 'Incorrect Code.',
             'correct_code' => $correctCode
         ], 401);
     }
