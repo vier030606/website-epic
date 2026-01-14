@@ -241,7 +241,9 @@
 
             input.addEventListener('input', (e) => {
                 input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
-
+                input.style.backgroundColor = "white";
+                input.style.color = "#000000";
+                input.style.border = "";
                 if (input.value) {
                     input.classList.add('filled');
                     if (index < codeInputs.length - 1) {
