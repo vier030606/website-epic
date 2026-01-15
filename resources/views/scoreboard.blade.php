@@ -727,7 +727,7 @@ text-shadow:
 
             <div class="score-main">
                 <div class="score">
-                    <h3>EST ON HAND</h3>
+                    <h3>POIN TOTAL</h3>
                     <!-- {{-- Border box ikut berubah sesuai warna level --}} -->
                     <div class="score-cont" style="border-color: {{ $lvlColor }};">
                         <h3>{{ $currentScore }}</h3>
@@ -735,7 +735,7 @@ text-shadow:
                 </div>
 
                 <div class="score">
-                    <h3>EST TOTAL</h3>
+                    <h3>POIN RALLY</h3>
                     <div class="score-cont" style="border-color: {{ $lvlColor }};">
                         <h3>{{ $totalScore }}</h3>
                     </div>
