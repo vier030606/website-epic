@@ -55,7 +55,7 @@ class ScoreController extends Controller
     $teamName = $request->input('team') ?? session('current_team', 'GUEST'); 
     // dd($teamName);
     try {
-        $response = Http::get('https://sheetdb.io/api/v1/0ylr577ytdtnt', [
+        $response = Http::get('https://sheetdb.io/api/v1/rlg5trqmknfs1', [
             'sheet' => 'REKAP ECT RALLY GAMES SEMENTARA'
         ]);
 
