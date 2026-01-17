@@ -694,10 +694,10 @@ text-shadow:
 
         <div id="mainContainer" class="panel">
             @php
-                $valRally = $result->{'JUMLAH ECT ON HAND'} ?? 0;
+                $valRally = $result->{'JUMLAH EST ON HAND'} ?? 0;
                 $currentScore = (int) filter_var($valRally, FILTER_SANITIZE_NUMBER_INT);
                 
-                $valTotal = $result->{'TOTAL ECT RALLY'} ?? 0;
+                $valTotal = $result->{'TOTAL EST RALLY'} ?? 0;
                 $totalScore = (int) filter_var($valTotal, FILTER_SANITIZE_NUMBER_INT);
                 if($totalScore >= 90) {
                     $lvlColor = "#7DE05C";
