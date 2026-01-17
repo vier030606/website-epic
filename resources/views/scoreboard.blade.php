@@ -198,7 +198,7 @@ body {
     font-family: 'Fredoka';
 }
 
-.score h3 {
+.score h3, .last-updated {
     font-size: 55px;
     font-weight: bolder;
     /* -webkit-text-stroke: 1px #ffffff; */
@@ -741,6 +741,11 @@ text-shadow:
                     </div>
                 </div>
             </div>
+            @if($lastUpdated)
+                <div class="last-updated" style="font-size: 24px; ">
+                    <small>Last updated: {{ $lastUpdated }} WIB</small>
+                </div>
+            @endif
         </div>
     </div>
 </body>

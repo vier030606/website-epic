@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class ScoreController extends Controller
 {
@@ -81,6 +82,11 @@ class ScoreController extends Controller
                 }
             }
 
+        $jsonPath = storage_path('app/rally.json');
+        $lastUpdated = Carbon::createFromTimestamp(
+        filemtime($jsonPath)
+        )->timezone('Asia/Jakarta')->format('d M Y, H:i');
+
     } catch (\Exception $e) {
         logger("SheetDB Error: " . $e->getMessage());
         // Minimal fallback to prevent crash
@@ -90,7 +96,8 @@ class ScoreController extends Controller
     // Pass BOTH result and teamName to the view
     return view('scoreboard', [
         'result' => $result,
-        'teamName' => $teamName
+        'teamName' => $teamName,
+        'lastUpdated' => $lastUpdated
     ]);
 }
 }
