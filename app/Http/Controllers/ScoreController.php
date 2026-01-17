@@ -55,13 +55,18 @@ class ScoreController extends Controller
     $teamName = $request->input('team') ?? session('current_team', 'GUEST'); 
     // dd($teamName);
     try {
-        $response = Http::get('https://sheetdb.io/api/v1/rlg5trqmknfs1', [
-            'sheet' => 'REKAP ECT RALLY GAMES SEMENTARA'
-        ]);
-
-        if ($response->successful()) {
-            $data = $response->json();
-            
+        // $response = Http::get('https://sheetdb.io/api/v1/rlg5trqmknfs1', [
+        //     'sheet' => 'REKAP ECT RALLY GAMES SEMENTARA'
+        // ]);
+        // $data = $response->json();
+        //             file_put_contents(
+        //                 storage_path('app/rally.json'),
+        //                 json_encode($response->json(), JSON_PRETTY_PRINT)
+        //             );
+        $json = file_get_contents(storage_path('app/rally.json'));
+        $data = json_decode($json, true);
+          
+           
             if (!empty($data)) {
                 // Find the team in the 'KELOMPOK' column
                 $found = collect($data)->first(function ($item) use ($teamName) {
@@ -75,7 +80,7 @@ class ScoreController extends Controller
                     $result = (object) $data[0];
                 }
             }
-        }
+
     } catch (\Exception $e) {
         logger("SheetDB Error: " . $e->getMessage());
         // Minimal fallback to prevent crash
